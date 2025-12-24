@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Improving English Speaking Fluency Using English Dubbing</title>
+    <style>
+        /* ====================
+           1. 基础设置与科技感背景
+           ==================== */
+        :root {
+            --primary-green: #00C853;       /* 科技绿 */
+            --dark-green: #1B5E20;          /* 深绿 */
+            --light-bg: rgba(255, 255, 255, 0.92); /* 玻璃拟态背景 */
+            --tech-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15); /* 科技感阴影 */
+        }
+
+        body {
+            font-family: 'Roboto', 'Segoe UI', Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            /* 背景设置：图片1.jpg */
+            background: url('图片1.jpg') no-repeat center center fixed;
+            background-size: cover;
+            /* 叠加一层淡淡的绿色科技网格滤镜（可选） */
+            backdrop-filter: blur(2px); 
+        }
+
+        /* ====================
+           2. 顶部 Header
+           ==================== */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding-bottom: 25px;
+            border-bottom: 3px solid var(--primary-green);
+        }
+
+        .project-title {
+            background: linear-gradient(90deg, #2E7D32 0%, #00C853 100%); /* 绿色渐变 */
+            color: #fff;
+            padding: 25px 0;
+            margin: 0;
+            font-size: 28px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }
+
+        .opening-container {
+            width: 100%;
+            max-width: 900px;
+            margin: 30px auto 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--tech-shadow);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .banner-img {
+            width: 100%;
+            height: auto;
+            max-height: 400px; /* 限制高度 */
+            object-fit: cover;
+            display: block;
+        }
+
+        /* ====================
+           3. 科技感导航栏
+           ==================== */
+        nav {
+            background-color: #263238; /* 深色科技底色 */
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .nav-list {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            flex-wrap: wrap;
+        }
+
+        .nav-item {
+            padding: 15px 20px;
+            cursor: pointer;
+            color: #cfd8dc;
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border-right: 1px solid #37474f;
+            min-width: 140px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 鼠标悬停效果 */
+        .nav-item:hover {
+            background-color: #37474f;
+            color: var(--primary-green);
+        }
+
+        /* 选中激活状态：科技绿高亮 */
+        .nav-item.active {
+            background-color: #455A64;
+            color: #00E676; /* 荧光绿 */
+            font-weight: bold;
+            box-shadow: inset 0 -4px 0 var(--primary-green); /* 底部亮条 */
+        }
+
+        .student-name {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        .student-id {
+            display: block;
+            font-size: 12px;
+            opacity: 0.8;
+            font-family: 'Courier New', monospace; /* 代码风格字体 */
+        }
+
+        /* ====================
+           4. 内容卡片区域
+           ==================== */
+        .main-content {
+            max-width: 1100px; /* 稍微加宽以容纳图片 */
+            margin: 40px auto;
+            padding: 0 20px;
+            min-height: 600px;
+        }
+
+        .ppt-card {
+            background: var(--light-bg); /* 玻璃效果 */
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: var(--tech-shadow);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            display: none; /* 默认隐藏 */
+            animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+
+        .ppt-card.active {
+            display: block;
+        }
+
+        /* 动画效果 */
+        @keyframes slideUpFade {
+            from { opacity: 0; transform: translateY(30px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* 标题栏：Icon + 文字 */
+        .ppt-header-group {
+            display: flex;
+            align-items: center;
+            border-bottom: 2px solid #A5D6A7;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+
+        .title-icon {
+            height: 48px;
+            width: 48px;
+            margin-right: 15px;
+            border-radius: 8px;
+            object-fit: cover;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .ppt-title {
+            color: var(--dark-green);
+            font-size: 24px;
+            margin: 0;
+            font-weight: 700;
+        }
+
+        /* PPT图片容器 */
+        .ppt-image-container {
+            width: 100%;
+            text-align: center;
+            background-color: #f1f8e9; /* 图片加载前的浅绿底色 */
+            border-radius: 8px;
+            padding: 10px;
+            border: 1px dashed #c8e6c9;
+        }
+
+        .ppt-content-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .ppt-content-img:hover {
+            transform: scale(1.02); /* 鼠标悬停轻微放大 */
+        }
+
+        /* ====================
+           5. 底部 Footer
+           ==================== */
+        footer {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px 0 60px;
+            margin-top: 60px;
+            text-align: center;
+            border-top: 1px solid #ccc;
+        }
+
+        .end-btn {
+            background: linear-gradient(135deg, #00C853 0%, #009624 100%);
+            color: white;
+            padding: 15px 50px;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 200, 83, 0.4);
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+        }
+
+        .end-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 200, 83, 0.6);
+        }
+
+        #ending-container {
+            display: none;
+            margin-top: 40px;
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .ending-img {
+            max-width: 700px;
+            width: 90%;
+            height: auto;
+            border-radius: 12px;
+            border: 8px solid #fff;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        @keyframes popIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* 错误提示文字 */
+        .img-error-text {
+            color: #d32f2f;
+            font-size: 14px;
+            display: none;
+            padding: 20px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- 顶部 -->
+    <header>
+        <h1 class="project-title">Improving English Speaking Fluency Using English Dubbing</h1>
+        
+        <!-- 开场图片 -->
+        <div class="opening-container">
+            <img src="开场.jpg" alt="开场图片 (请确保文件名是 '开场.jpg')" class="banner-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <div class="img-error-text">图片加载失败：请检查文件夹中是否有 "开场.jpg"</div>
+        </div>
+    </header>
+
+    <!-- 导航栏 -->
+    <nav>
+        <ul class="nav-list">
+            <!-- 1. 曹欣茗 -->
+            <li class="nav-item active" onclick="switchTab(0)">
+                <span class="student-name">CAO XINMING</span>
+                <span class="student-id">SUKD2501183</span>
+            </li>
+            <!-- 2. 陈庆业 -->
+            <li class="nav-item" onclick="switchTab(1)">
+                <span class="student-name">CHEN QINGYE</span>
+                <span class="student-id">SUKD2501809</span>
+            </li>
+            <!-- 3. 唐清 -->
+            <li class="nav-item" onclick="switchTab(2)">
+                <span class="student-name">TANG QING</span>
+                <span class="student-id">SUKD2501379</span>
+            </li>
+            <!-- 4. 周星辰 -->
+            <li class="nav-item" onclick="switchTab(3)">
+                <span class="student-name">ZHOU XINGCHEN</span>
+                <span class="student-id">SUKD2501518</span>
+            </li>
+            <!-- 5. 刘晓彤 -->
+            <li class="nav-item" onclick="switchTab(4)">
+                <span class="student-name">LIU XIAOTONG</span>
+                <span class="student-id">SUKD2500848</span>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- 内容显示区域 -->
+    <div class="main-content">
+
+        <!-- 1. CAO XINMING (English Fun Dubbing) -->
+        <div class="ppt-card active" id="ppt-0">
+            <div class="ppt-header-group">
+                <img src="图片 2.png" alt="Logo" class="title-icon">
+                <h2 class="ppt-title">Introduction: English Fun Dubbing</h2>
+            </div>
+            <div class="ppt-image-container">
+                <!-- 这里的 src 必须完全匹配您提供的文件名 -->
+                <img src="CAO XINMING SUKD2501183.png" alt="Cao Xinming Slide" class="ppt-content-img" onerror="this.style.display='none'; this.parentElement.innerHTML='<p style=\'color:red\'>图片未找到: CAO XINMING SUKD2501183.png</p>'">
+            </div>
+        </div>
+
+        <!-- 2. CHEN QINGYE (Problem Background) -->
+        <div class="ppt-card" id="ppt-1">
+            <div class="ppt-header-group">
+                <img src="图片 2.png" alt="Logo" class="title-icon">
+                <h2 class="ppt-title">Problem Background & Interface Analysis</h2>
+            </div>
+            <div class="ppt-image-container">
+                <!-- 注意文件名里的 OINGYE -->
+                <img src="CHEN OINGYE SUKD2501809.png" alt="Chen Qingye Slide" class="ppt-content-img" onerror="this.style.display='none'; this.parentElement.innerHTML='<p style=\'color:red\'>图片未找到: CHEN OINGYE SUKD2501809.png</p>'">
+            </div>
+        </div>
+
+        <!-- 3. TANG QING (AI-Driven Expert) -->
+        <div class="ppt-card" id="ppt-2">
+            <div class="ppt-header-group">
+                <img src="图片 2.png" alt="Logo" class="title-icon">
+                <h2 class="ppt-title">Solutions: AI-Driven Expert</h2>
+            </div>
+            <div class="ppt-image-container">
+                <!-- 注意文件名里的 OING -->
+                <img src="TANG OING SUKD2501379.png" alt="Tang Qing Slide" class="ppt-content-img" onerror="this.style.display='none'; this.parentElement.innerHTML='<p style=\'color:red\'>图片未找到: TANG OING SUKD2501379.png</p>'">
+            </div>
+        </div>
+
+        <!-- 4. ZHOU XINGCHEN (Teaching Input) -->
+        <div class="ppt-card" id="ppt-3">
+            <div class="ppt-header-group">
+                <img src="图片 2.png" alt="Logo" class="title-icon">
+                <h2 class="ppt-title">Methodology: Teaching Input & Activities</h2>
+            </div>
+            <div class="ppt-image-container">
+                <img src="ZHOUXINGCHEN SUKD2501518.png" alt="Zhou Xingchen Slide" class="ppt-content-img" onerror="this.style.display='none'; this.parentElement.innerHTML='<p style=\'color:red\'>图片未找到: ZHOUXINGCHEN SUKD2501518.png</p>'">
+            </div>
+        </div>
+
+        <!-- 5. LIU XIAOTONG (Assessment) -->
+        <div class="ppt-card" id="ppt-4">
+            <div class="ppt-header-group">
+                <img src="图片 2.png" alt="Logo" class="title-icon">
+                <h2 class="ppt-title">Conclusion & Assessment Activity</h2>
+            </div>
+            <div class="ppt-image-container">
+                <!-- 注意文件名可能有空格 -->
+                <img src="LIUXAOTONG SUKD2500848 .png" alt="Liu Xiaotong Slide" class="ppt-content-img" onerror="this.style.display='none'; this.parentElement.innerHTML='<p style=\'color:red\'>图片未找到: LIUXAOTONG SUKD2500848 .png</p>'">
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 底部：按钮与结束图片 -->
+    <footer>
+        <button class="end-btn" onclick="toggleEnding()">点击结束展示 (End Presentation)</button>
+        
+        <div id="ending-container">
+            <img src="结束.jpg" alt="结束图片" class="ending-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <div class="img-error-text">图片加载失败：请检查文件夹中是否有 "结束.jpg"</div>
+        </div>
+    </footer>
+
+    <!-- JS 逻辑 -->
+    <script>
+        function switchTab(index) {
+            const navItems = document.querySelectorAll('.nav-item');
+            const pptCards = document.querySelectorAll('.ppt-card');
+
+            navItems.forEach(item => item.classList.remove('active'));
+            pptCards.forEach(card => card.classList.remove('active'));
+
+            navItems[index].classList.add('active');
+            pptCards[index].classList.add('active');
+        }
+
+        function toggleEnding() {
+            var container = document.getElementById("ending-container");
+            if (container.style.display === "block") {
+                container.style.display = "none";
+            } else {
+                container.style.display = "block";
+                setTimeout(() => {
+                    container.scrollIntoView({ behavior: 'smooth' });
+                }, 100);
+            }
+        }
+    </script>
+</body>
+</html>
+
